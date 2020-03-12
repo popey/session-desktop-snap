@@ -1,0 +1,70 @@
+name: session-desktop
+base: core18
+adopt-info: session-desktop
+summary: Session Desktop
+description: |
+  Session Desktop - Onion routing based messenger
+
+grade: stable
+confinement: strict
+
+architectures: 
+  - build-on: amd64
+
+parts:
+  build-trigger:
+    source: https://github.com/loki-project/session-desktop.git
+    plugin: nil
+  session-desktop:
+    plugin: nil
+    build-packages:
+      - wget
+      - jq
+      - dpkg
+      - git
+    stage-packages:
+      - libxss1
+      - libnspr4
+      - libnss3
+    override-build: |
+      set -xeu
+      ARCHITECTURE=$(dpkg --print-architecture)
+      echo "Get GitHub releases..."
+      wget --quiet https://api.github.com/repos/loki-project/session-desktop/releases -O releases.json
+      # Get the version from the tag_name and the download URL.
+      VERSION=$(jq . releases.json | grep tag_name | grep -v beta | head -n 1 | cut -d'"' -f4)
+      DEB_URL=$(grep browser_download_url releases.json | grep "download/${VERSION}" | grep deb | grep $ARCHITECTURE | grep -v sha256 | cut -d'"' -f4)
+      wget --quiet $DEB_URL -O session.deb
+      dpkg-deb -x session.deb $SNAPCRAFT_PART_INSTALL/
+      rm session.deb releases.json
+      sed -i 's|Icon=session-messenger-desktop|Icon=${SNAP}/usr/share/icons/hicolor/512x512/apps/session-messenger-desktop.png|' $SNAPCRAFT_PART_INSTALL/usr/share/applications/session-messenger-desktop.desktop
+      snapcraftctl set-version "$VERSION"
+    prime:
+      - -opt/Session/chrome-sandbox
+
+apps:
+  session-desktop:
+    extensions: [gnome-3-28]
+    desktop: usr/share/applications/session-messenger-desktop.desktop
+    command: opt/Session/session-messenger-desktop --use-tray-icon --no-sandbox
+    plugs:
+      - desktop
+      - desktop-legacy
+      - home
+      - x11
+      - wayland
+      - unity7
+      - browser-support
+      - network
+      - gsettings
+      - pulseaudio
+      - opengl
+    environment:
+      DISABLE_WAYLAND: '1'
+      GTK_USE_PORTAL: "1"
+      TMPDIR: $XDG_RUNTIME_DIR
+      PATH: '$SNAP/usr/sbin:$SNAP/usr/bin:$SNAP/sbin:$SNAP/bin:$PATH'
+      SNAP_DESKTOP_RUNTIME: $SNAP/gnome-platform
+      LD_LIBRARY_PATH: '$SNAP_LIBRARY_PATH:$SNAP/lib:$SNAP/usr/lib:$SNAP/lib/x86_64-linux-gnu:$SNAP/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH:$SNAP/lib:$SNAP/usr/lib:$SNAP/lib/x86_64-linux-gnu:$SNAP/usr/lib/x86_64-linux-gnu'
+      WAYLAND_DISPLAY: no-display
+      XDG_CURRENT_DESKTOP: Unity
