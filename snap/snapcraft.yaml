@@ -22,10 +22,13 @@ parts:
       - jq
       - dpkg
       - git
+      - gcc
     stage-packages:
       - libxss1
       - libnspr4
       - libnss3
+      - openssl
+      - libvips42
     override-build: |
       set -xeu
       ARCHITECTURE=$(dpkg --print-architecture)
@@ -48,16 +51,18 @@ apps:
     desktop: usr/share/applications/session-messenger-desktop.desktop
     command: opt/Session/session-messenger-desktop --use-tray-icon --no-sandbox
     plugs:
+      - audio-playback
+      - audio-record
       - desktop
       - desktop-legacy
       - home
+      - bluez
       - x11
       - wayland
       - unity7
       - browser-support
       - network
       - gsettings
-      - pulseaudio
       - opengl
     environment:
       DISABLE_WAYLAND: '1'
