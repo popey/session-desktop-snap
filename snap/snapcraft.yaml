@@ -61,6 +61,7 @@ apps:
       - wayland
       - unity7
       - browser-support
+      - process-control
       - network
       - gsettings
       - opengl
