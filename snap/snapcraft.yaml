@@ -49,7 +49,7 @@ apps:
   session-desktop:
     extensions: [gnome-3-34]
     desktop: usr/share/applications/session-desktop.desktop
-    command: opt/Session/session-desktop-bin --use-tray-icon --no-sandbox
+    command: opt/Session/session-desktop --use-tray-icon --no-sandbox
     plugs:
       - audio-playback
       - audio-record
