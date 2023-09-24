@@ -3,6 +3,8 @@
 [![session-desktop](https://snapcraft.io/session-desktop/badge.svg)](https://snapcraft.io/session-desktop)
 [![session-desktop](https://snapcraft.io/session-desktop/trending.svg?name=0)](https://snapcraft.io/session-desktop)
 
+![Alt](https://repobeats.axiom.co/api/embed/93e49ed7bea7d5c3b512e3e4b73aae2d56fac1a1.svg "Repobeats analytics image")
+
 Session Desktop - Onion routing based messenger
 
 [![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/session-desktop)
