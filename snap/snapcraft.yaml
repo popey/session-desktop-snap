@@ -13,7 +13,7 @@ architectures:
 
 parts:
   build-trigger:
-    source: https://github.com/loki-project/session-desktop.git
+    source: https://github.com/oxen-io/session-desktop.git
     plugin: nil
   session-desktop:
     plugin: nil
@@ -33,7 +33,7 @@ parts:
       set -xeu
       ARCHITECTURE=$(dpkg --print-architecture)
       echo "Get GitHub releases..."
-      wget --quiet https://api.github.com/repos/loki-project/session-desktop/releases -O releases.json
+      wget --quiet https://api.github.com/repos/oxen-io/session-desktop/releases -O releases.json
       # Get the version from the tag_name and the download URL.
       VERSION=$(jq . releases.json | grep tag_name | grep -v beta | head -n 1 | cut -d'"' -f4 | tr -d 'v')
       DEB_URL=$(grep browser_download_url releases.json | grep "download/v${VERSION}" | grep deb | grep $ARCHITECTURE | grep -v sha256 | cut -d'"' -f4)
