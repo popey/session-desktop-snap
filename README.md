@@ -1,5 +1,6 @@
 # Session Desktop
 
+[![session-desktop](https://github.com/popey/session-desktop-snap/actions/workflows/build.yml/badge.svg)](https://github.com/popey/session-desktop-snap/actions)
 [![session-desktop](https://snapcraft.io/session-desktop/badge.svg)](https://snapcraft.io/session-desktop)
 [![session-desktop](https://snapcraft.io/session-desktop/trending.svg?name=0)](https://snapcraft.io/session-desktop)
 
