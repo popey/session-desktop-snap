@@ -53,6 +53,7 @@ apps:
     plugs:
       - audio-playback
       - audio-record
+      - camera
       - desktop
       - desktop-legacy
       - home
