@@ -41,7 +41,7 @@ parts:
       dpkg-deb -x session.deb $SNAPCRAFT_PART_INSTALL/
       rm session.deb releases.json
       sed -i 's|Icon=session-desktop|Icon=${SNAP}/usr/share/icons/hicolor/512x512/apps/session-desktop.png|' $SNAPCRAFT_PART_INSTALL/usr/share/applications/session-desktop.desktop
-      rm ${SNAP}/opt/Session/resources/app.asar.unpacked/node_modules/@signalapp/better-sqlite3/build/node_gyp_bins/python3
+      rm ${SNAPCRAFT_PART_INSTALL}/opt/Session/resources/app.asar.unpacked/node_modules/@signalapp/better-sqlite3/build/node_gyp_bins/python3
       snapcraftctl set-version "$VERSION"
     prime:
       - -opt/Session/chrome-sandbox
