@@ -1,5 +1,5 @@
 name: session-desktop
-base: core20
+base: core22
 adopt-info: session-desktop
 summary: Session Desktop
 description: |
@@ -47,7 +47,7 @@ parts:
 
 apps:
   session-desktop:
-    extensions: [gnome-3-38]
+    extensions: [gnome]
     desktop: usr/share/applications/session-desktop.desktop
     command: opt/Session/session-desktop --use-tray-icon --no-sandbox
     plugs:
