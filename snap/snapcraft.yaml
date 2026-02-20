@@ -12,9 +12,6 @@ architectures:
   - build-on: amd64
 
 parts:
-  build-trigger:
-    source: https://github.com/session-foundation/session-desktop.git
-    plugin: nil
   session-desktop:
     plugin: nil
     build-packages:
@@ -67,7 +64,6 @@ apps:
       - gsettings
       - opengl
     environment:
-      DISABLE_WAYLAND: '1'
       GTK_USE_PORTAL: "1"
       TMPDIR: $XDG_RUNTIME_DIR
       PATH: '$SNAP/usr/sbin:$SNAP/usr/bin:$SNAP/sbin:$SNAP/bin:$PATH'
